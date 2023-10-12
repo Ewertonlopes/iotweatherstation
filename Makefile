@@ -3,9 +3,9 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := power_save
+PROJECT_NAME := iot_wheater_station
 
-EXTRA_COMPONENT_DIRS = $(IDF_PATH)/examples/common_components/protocol_examples_common
+#EXTRA_COMPONENT_DIRS = $(IDF_PATH)/examples/common_components/protocol_examples_common
 
 include $(IDF_PATH)/make/project.mk
 
