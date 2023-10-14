@@ -45,7 +45,7 @@ uint16_t uv_read()
             if(i == 8) uv_index = 10;
         }
 
-        ESP_LOGI(uvTAG , "UV INDEX: %d\r\n", uv_index);
+        ESP_LOGI(uvTAG , "ADC READ: %d\r\n", adc_data[0]);
     }
-    return uv_index;
+    return adc_data[0];
 }
