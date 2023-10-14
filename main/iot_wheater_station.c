@@ -33,7 +33,7 @@
 
 float temperature = 0.0f;
 float humidity = 0.0f;
-
+uint16_t keepalive = 0;
 
 
 void app_main(void)
@@ -53,16 +53,22 @@ void app_main(void)
    esp_mqtt_client_handle_t mclient;
    mclient = mqtt_app_start();
    int msg_id;
-   
+   char buffer[6];
+
    
    while(true)
    {
-      //printf("Getting Out Light Sleep Mode\n");
-      char buffer[6];
-      sprintf(buffer, "%u", uv_index_output);
-      const char *msge = buffer;
 
+      sprintf(buffer, "%u", uv_index_output);
+      const char *msge2 = buffer;
+      msg_id = esp_mqtt_client_publish(mclient, "/outside/metsta/uv", msge2, 0, 1, 0);
+      
+      sprintf(buffer, "%u", keepalive++);
+      const char *msge = buffer;
       msg_id = esp_mqtt_client_publish(mclient, "/outside/metsta/humi", msge, 0, 1, 0);
+      
+      if(keepalive >100) keepalive = 0;
+
       vTaskDelay(pdMS_TO_TICKS(1000));
       //printf("Entering Light Sleep Mode\n");
       //esp_light_sleep_start();
