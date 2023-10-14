@@ -13,7 +13,9 @@
 
 static const char *uvTAG = "UV Sensor";
 
-static void uv_task();
+extern uint16_t uv_index_output;
+
+void uv_task();
 void uv_init();
 uint16_t uv_read();
 

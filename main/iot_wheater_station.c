@@ -40,19 +40,29 @@ void app_main(void)
 {
    ESP_ERROR_CHECK(nvs_flash_init());
 
+   uv_init();
+
    //ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
    wifi_init_sta();
 
-   //uv_init();
+   
    //esp_sleep_enable_timer_wakeup(1000000);
    //esp_wifi_stop();
    //esp_power_consumption_info(true);
-   esp_mqtt_client_handle_t client;
 
-   mqtt_app_start();
+   esp_mqtt_client_handle_t mclient;
+   mclient = mqtt_app_start();
+   int msg_id;
+   
+   
    while(true)
    {
       //printf("Getting Out Light Sleep Mode\n");
+      char buffer[6];
+      sprintf(buffer, "%u", uv_index_output);
+      const char *msge = buffer;
+
+      msg_id = esp_mqtt_client_publish(mclient, "/outside/metsta/humi", msge, 0, 1, 0);
       vTaskDelay(pdMS_TO_TICKS(1000));
       //printf("Entering Light Sleep Mode\n");
       //esp_light_sleep_start();

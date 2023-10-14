@@ -1,10 +1,12 @@
 #include "uv.h"
 
-static void uv_task()
+uint16_t uv_index_output = 0;
+
+void uv_task()
 {
     ESP_LOGI(uvTAG , "Task Started\n");
     while (1) {
-        uint16_t read = uv_read();
+        uv_index_output = uv_read();
         
         vTaskDelay(pdMS_TO_TICKS(1000));
     }

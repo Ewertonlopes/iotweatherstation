@@ -2,6 +2,7 @@
     "files.associations": {
         "dht11.h": "c",
         "uv.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "mqttmod.h": "c"
     }
 }
