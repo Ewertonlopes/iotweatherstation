@@ -23,9 +23,27 @@ void uv_init()
 
 uint16_t uv_read()
 {
-    uint16_t adc_data[100];
-    if (ESP_OK == adc_read(&adc_data[0])) {
-        ESP_LOGI(UVTAG , "adc read: %d\r\n", adc_data[0]);
+    const uint16_t UV_LIMITS[] = {226, 317, 407, 502, 605, 794, 880, 975, 1169};
+
+    uint16_t uv_index = 50;
+    uint16_t adc_data[10];
+
+    
+    if (ESP_OK == adc_read(&adc_data[0])) 
+    {
+        uint16_t tension = adc_data[0]/1024 * 3300;
+
+        for(int i =0; i<9; i++)
+        {
+            if(tension < UV_LIMITS[i])
+            {
+                uv_index = i;
+                break;
+            }
+            if(i == 8) uv_index = 10;
+        }
+
+        ESP_LOGI(UVTAG , "UV INDEX: %d\r\n", uv_index);
     }
-    return adc_data[0];
+    return uv_index;
 }

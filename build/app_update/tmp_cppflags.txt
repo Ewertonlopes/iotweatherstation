@@ -1,1 +1,1 @@
-0f0fadb-dirty iot_wheater_station v3.4-85-g015f3099-dirty
+45c72f9-dirty iot_wheater_station v3.4-85-g015f3099-dirty
