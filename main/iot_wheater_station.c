@@ -23,21 +23,25 @@
 #include "esp_wifi.h"
 
 #include "dht11.h"
+#include "uv.h"
 
 float temperature = 0.0f;
 float humidity = 0.0f;
 
+
+
 void app_main(void)
 {
+   uv_init();
    //esp_sleep_enable_timer_wakeup(1000000);
    esp_wifi_stop();
    esp_power_consumption_info(true);
+   
    while(true)
    {
       //printf("Getting Out Light Sleep Mode\n");
       vTaskDelay(pdMS_TO_TICKS(1000));
       //printf("Entering Light Sleep Mode\n");
-      read_dht(14,&temperature, &humidity);
       //esp_light_sleep_start();
       //esp_power_consumption_info(false);
    }
