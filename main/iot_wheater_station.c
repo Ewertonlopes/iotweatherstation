@@ -20,8 +20,11 @@
 #include "esp_system.h"
 #include "esp_spi_flash.h"
 #include "esp_sleep.h"
-#include "esp_wifi.h"
 
+#include "nvs.h"
+#include "nvs_flash.h"
+
+#include "wifiabs.h"
 #include "dht11.h"
 #include "uv.h"
 
@@ -32,10 +35,15 @@ float humidity = 0.0f;
 
 void app_main(void)
 {
-   uv_init();
+   ESP_ERROR_CHECK(nvs_flash_init());
+
+   //ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
+   wifi_init_sta();
+
+   //uv_init();
    //esp_sleep_enable_timer_wakeup(1000000);
-   esp_wifi_stop();
-   esp_power_consumption_info(true);
+   //esp_wifi_stop();
+   //esp_power_consumption_info(true);
    
    while(true)
    {

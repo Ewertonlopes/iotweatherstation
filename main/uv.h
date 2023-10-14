@@ -11,7 +11,7 @@
 #include "driver/adc.h"
 #include "esp_log.h"
 
-static const char *UVTAG = "UV Sensor";
+static const char *uvTAG = "UV Sensor";
 
 static void uv_task();
 void uv_init();

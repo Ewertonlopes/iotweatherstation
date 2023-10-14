@@ -2,7 +2,7 @@
 
 static void uv_task()
 {
-    ESP_LOGI(UVTAG , "Task Started\n");
+    ESP_LOGI(uvTAG , "Task Started\n");
     while (1) {
         uint16_t read = uv_read();
         
@@ -17,7 +17,7 @@ void uv_init()
     adc_config.mode = ADC_READ_TOUT_MODE;
     adc_config.clk_div = 8; 
     ESP_ERROR_CHECK(adc_init(&adc_config));
-    ESP_LOGI(UVTAG , "ADC started\n");
+    ESP_LOGI(uvTAG , "ADC started\n");
     xTaskCreate(uv_task, "UV_task", 1024, NULL, 5, NULL);
 }
 
@@ -43,7 +43,7 @@ uint16_t uv_read()
             if(i == 8) uv_index = 10;
         }
 
-        ESP_LOGI(UVTAG , "UV INDEX: %d\r\n", uv_index);
+        ESP_LOGI(uvTAG , "UV INDEX: %d\r\n", uv_index);
     }
     return uv_index;
 }
