@@ -24,7 +24,10 @@
 #include "nvs.h"
 #include "nvs_flash.h"
 
-#include "wifiabs.h"
+#include "wifimod.h"
+
+#include "mqttmod.h"
+
 #include "dht11.h"
 #include "uv.h"
 
@@ -44,7 +47,9 @@ void app_main(void)
    //esp_sleep_enable_timer_wakeup(1000000);
    //esp_wifi_stop();
    //esp_power_consumption_info(true);
-   
+   esp_mqtt_client_handle_t client;
+
+   mqtt_app_start();
    while(true)
    {
       //printf("Getting Out Light Sleep Mode\n");
