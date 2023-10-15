@@ -33,7 +33,6 @@
 
 float temperature = 0.0f;
 float humidity = 0.0f;
-uint16_t keepalive = 0;
 
 
 void app_main(void)
@@ -46,7 +45,7 @@ void app_main(void)
    wifi_init_sta();
 
    
-   //esp_sleep_enable_timer_wakeup(1000000);
+   //esp_sleep_enable_timer_wakeup(10000000);
    //esp_wifi_stop();
    //esp_power_consumption_info(true);
 
@@ -58,16 +57,10 @@ void app_main(void)
    
    while(true)
    {
-
       sprintf(buffer, "%u", uv_index_output);
       const char *msge2 = buffer;
       msg_id = esp_mqtt_client_publish(mclient, "/outside/metsta/uv", msge2, 0, 1, 0);
       
-      sprintf(buffer, "%u", keepalive++);
-      const char *msge = buffer;
-      msg_id = esp_mqtt_client_publish(mclient, "/outside/metsta/humi", msge, 0, 1, 0);
-      
-      if(keepalive >100) keepalive = 0;
 
       vTaskDelay(pdMS_TO_TICKS(1000));
       //printf("Entering Light Sleep Mode\n");

@@ -33,7 +33,7 @@ uint16_t uv_read()
     
     if (ESP_OK == adc_read(&adc_data[0])) 
     {
-        uint16_t tension = adc_data[0]/1024 * 3300;
+        uint16_t tension = (uint16_t)(((float)adc_data[0]/1024.0f) * 3300.0f);
 
         for(int i =0; i<9; i++)
         {
@@ -47,5 +47,5 @@ uint16_t uv_read()
 
         ESP_LOGI(uvTAG , "ADC READ: %d\r\n", adc_data[0]);
     }
-    return adc_data[0];
+    return uv_index;
 }
