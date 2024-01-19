@@ -31,7 +31,7 @@
 #include "dht11.h"
 #include "uv.h"
 
-#define pin_numb 1
+#define pin_numb 5
 
 void makefloat(float number, char* buffer)
 {
@@ -112,7 +112,7 @@ void app_main(void)
       printf("Temperature: %s\n",tbuffer);
       printf("Humidity: %s",hbuffer);
       vTaskDelay(pdMS_TO_TICKS(1000));
-      
+
       //printf("Entering Light Sleep Mode\n");
       //esp_light_sleep_start();
       //esp_power_consumption_info(false);
