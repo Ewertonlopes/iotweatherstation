@@ -25,12 +25,10 @@
 #include "nvs_flash.h"
 
 #include "wifimod.h"
-
 #include "mqttmod.h"
-
 #include "dht11.h"
 #include "uv.h"
-
+ 
 #define pin_numb 5
 
 void makefloat(float number, char* buffer)
@@ -109,8 +107,6 @@ void app_main(void)
       const char *msge2 = buffer;
       msg_id = esp_mqtt_client_publish(mclient, "/outside/metsta/uv", msge2, 0, 1, 0);
       
-      printf("Temperature: %s\n",tbuffer);
-      printf("Humidity: %s",hbuffer);
       vTaskDelay(pdMS_TO_TICKS(1000));
 
       //printf("Entering Light Sleep Mode\n");

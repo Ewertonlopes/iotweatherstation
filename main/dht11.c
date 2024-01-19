@@ -48,7 +48,10 @@ int read_dht(int pin, float* temperature, float* humidity)
                             ((dht11_transfer[3] + dht11_transfer[2] + 
                             dht11_transfer[1] + dht11_transfer[0]) && 0xFF))
     {
-        printf("Humidity = %d.%d %% Temperature = %d.%d *C\n",dht11_transfer[0],dht11_transfer[1],dht11_transfer[2],dht11_transfer[3]);
+        *humidity = dht11_transfer[0] + (float)dht11_transfer[1] / 10;
+        *temperature = dht11_transfer[2] + (float)dht11_transfer[3] / 10;
+
+        printf("Humidity = %.1f %% Temperature = %.1f *C\n", *humidity, *temperature);
     }
     else
     {
