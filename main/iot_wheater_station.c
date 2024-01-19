@@ -31,8 +31,7 @@
 #include "dht11.h"
 #include "uv.h"
 
-float temperature = 0.0f;
-float humidity = 0.0f;
+#define pin_numb 1
 
 
 void app_main(void)
@@ -53,10 +52,11 @@ void app_main(void)
    mclient = mqtt_app_start();
    int msg_id;
    char buffer[6];
-
-   
+   float temp, humi;
+      
    while(true)
    {
+      read_dht(pin_numb,&temp,&humi)
       sprintf(buffer, "%u", uv_index_output);
       const char *msge2 = buffer;
       msg_id = esp_mqtt_client_publish(mclient, "/outside/metsta/uv", msge2, 0, 1, 0);
