@@ -33,6 +33,50 @@
 
 #define pin_numb 1
 
+void makefloat(float number, char* buffer)
+{
+   int16_t number_n = (uint16_t)(number);
+   uint16_t number_v = 0;
+   if(number > 0)
+   {
+      number_v = (uint16_t)(number*1000.0f - (float)number_n*1000.0f);
+      if(number_v<100)
+      {
+         if(number_v<10)
+         {
+            sprintf(buffer, "%u.00%u", number_n,number_v);
+         }
+         else
+         {
+            sprintf(buffer, "%u.0%u", number_n,number_v);
+         }   
+      }
+      else
+      {
+         sprintf(buffer, "%u.%u", number_n,number_v);  
+      }
+   }
+   else
+   {
+      number_v = (uint16_t)((float)number_n*1000.0f - number*1000.0f);
+      if(number_v<100)
+      {
+         if(number_v<10)
+         {
+            sprintf(buffer, "-%u.00%u", number_n,number_v);
+         }
+         else
+         {
+            sprintf(buffer, "-%u.0%u", number_n,number_v);
+         }
+      }
+      else
+      {
+         sprintf(buffer, "-%u.%u", number_n,number_v);  
+      }
+   }
+}
+
 
 void app_main(void)
 {
@@ -52,17 +96,23 @@ void app_main(void)
    mclient = mqtt_app_start();
    int msg_id;
    char buffer[6];
+   char tbuffer[8];
+   char hbuffer[8];
    float temp, humi;
       
    while(true)
    {
-      read_dht(pin_numb,&temp,&humi)
+      read_dht(pin_numb,&temp,&humi);
+      makefloat(temp,tbuffer);
+      makefloat(humi,hbuffer);
       sprintf(buffer, "%u", uv_index_output);
       const char *msge2 = buffer;
       msg_id = esp_mqtt_client_publish(mclient, "/outside/metsta/uv", msge2, 0, 1, 0);
       
-
+      printf("Temperature: %s\n",tbuffer);
+      printf("Humidity: %s",hbuffer);
       vTaskDelay(pdMS_TO_TICKS(1000));
+      
       //printf("Entering Light Sleep Mode\n");
       //esp_light_sleep_start();
       //esp_power_consumption_info(false);
