@@ -7,4 +7,12 @@
 - UV Sensor.
 - 10 kohm Resistence.
 
-## Software Struct
+## Firmware Struct
+
+Using esp IDF, Espressif IoT Development Network, the following modules were created using the Esp IDF as a SDK:
+
+- TCP/IP Module.
+- MQTT Client Module.
+- Temperature and Humidity Read Module.
+- UV Read Module.
+- Rain Recognition Module.
