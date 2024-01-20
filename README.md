@@ -16,3 +16,8 @@ Using esp IDF, Espressif IoT Development Network, the following modules were cre
 - Temperature and Humidity Read Module.
 - UV Read Module.
 - Rain Recognition Module.
+
+## Version
+
+- Version 0.1
+Base of system.
