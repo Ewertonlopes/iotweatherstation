@@ -1,5 +1,10 @@
 # IoT weather station
 
-## Componentes
+## Components
 
-## Estrutura de Software
+- Esp8266 PRO d1 mini module.
+- DHT11 - Temperature and Humidity Sensor.
+- UV Sensor.
+- 10 kohm Resistence.
+
+## Software Struct
